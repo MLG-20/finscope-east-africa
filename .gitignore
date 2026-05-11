@@ -1,0 +1,16 @@
+# Environnement virtuel
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Notebook (67 Mo — trop lourd pour GitHub)
+finance_africa.ipynb
+
+# Données non utilisées par l'app
+Train.csv
+
+# Secrets Streamlit
+.streamlit/secrets.toml
