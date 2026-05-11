@@ -11,6 +11,7 @@ finance_africa.ipynb
 
 # Données non utilisées par l'app
 Train.csv
+VariableDefinitions.csv
 
 # Secrets Streamlit
 .streamlit/secrets.toml
