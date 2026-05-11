@@ -831,12 +831,20 @@ elif selected == "👨‍👩‍👧 Q4. Ménages":
         with col2:
             chart_header("📈 Âge vs Taille du ménage", "Nuage de points avec régression linéaire (OLS)")
             sample = df_filtered.sample(n=min(800, n), random_state=42)
+            _x = sample['age_repondant'].dropna()
+            _y = sample['taille_menage'].dropna()
+            _common = sample[['age_repondant', 'taille_menage']].dropna()
+            _coef = np.polyfit(_common['age_repondant'], _common['taille_menage'], 1)
+            _x_range = np.linspace(_common['age_repondant'].min(), _common['age_repondant'].max(), 100)
+            _y_range = np.polyval(_coef, _x_range)
             fig = px.scatter(
                 sample, x='age_repondant', y='taille_menage',
-                trendline='ols', opacity=0.4,
+                opacity=0.4,
                 labels={'age_repondant': 'Âge du répondant', 'taille_menage': 'Taille du ménage'},
                 color_discrete_sequence=['#2563a8']
             )
+            fig.add_scatter(x=_x_range, y=_y_range, mode='lines', name='Tendance',
+                            line=dict(color='#e74c3c', width=2))
             fig.update_layout(height=380, margin=dict(t=10, b=10))
             st.plotly_chart(fig, use_container_width=True, key="chart_11")
 
